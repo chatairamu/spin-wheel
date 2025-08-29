@@ -14,6 +14,19 @@ body {
     height: 400px;
 }
 
+.pointer {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 30px solid #333;
+    z-index: 20;
+}
+
 .wheel {
     width: 100%;
     height: 100%;
@@ -22,39 +35,49 @@ body {
     position: relative;
     overflow: hidden;
     transition: transform 5s ease-out;
+    background: conic-gradient(
+        #ffdddd 0deg 45deg,
+        #ddffdd 45deg 90deg,
+        #ddddff 90deg 135deg,
+        #ffffdd 135deg 180deg,
+        #ffddff 180deg 225deg,
+        #ddffff 225deg 270deg,
+        #ffeddd 270deg 315deg,
+        #edffdd 315deg 360deg
+    );
 }
 
 .segment {
     position: absolute;
     width: 50%;
     height: 50%;
-    background-color: #fff;
-    transform-origin: 100% 100%;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 0);
+    top: 0;
+    left: 50%;
+    transform-origin: 0 100%;
     display: flex;
+    align-items: flex-end; /* Align text to the outer edge */
     justify-content: center;
-    align-items: center;
     font-size: 16px;
     color: #333;
-    padding-left: 50px;
+    transform: rotate(calc(45deg * var(--i) - 45deg / 2));
+    padding-bottom: 20px;
     box-sizing: border-box;
 }
 
-.segment:nth-child(1) { transform: rotate(0deg); background-color: #ffdddd; }
-.segment:nth-child(2) { transform: rotate(45deg); background-color: #ddffdd; }
-.segment:nth-child(3) { transform: rotate(90deg); background-color: #ddddff; }
-.segment:nth-child(4) { transform: rotate(135deg); background-color: #ffffdd; }
-.segment:nth-child(5) { transform: rotate(180deg); background-color: #ffddff; }
-.segment:nth-child(6) { transform: rotate(225deg); background-color: #ddffff; }
-.segment:nth-child(7) { transform: rotate(270deg); background-color: #ffeddd; }
-.segment:nth-child(8) { transform: rotate(315deg); background-color: #edffdd; }
-
 .segment span {
-    display: block;
-    transform: rotate(22.5deg) translate(-20%, -50%);
-    text-align: center;
-    width: 100px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
 }
+
+.segment:nth-child(1) { --i: 1; }
+.segment:nth-child(2) { --i: 2; }
+.segment:nth-child(3) { --i: 3; }
+.segment:nth-child(4) { --i: 4; }
+.segment:nth-child(5) { --i: 5; }
+.segment:nth-child(6) { --i: 6; }
+.segment:nth-child(7) { --i: 7; }
+.segment:nth-child(8) { --i: 8; }
+
 
 #spin-btn {
     position: absolute;
